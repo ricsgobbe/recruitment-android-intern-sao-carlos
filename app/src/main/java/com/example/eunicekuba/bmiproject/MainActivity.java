@@ -7,11 +7,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.BounceInterpolator;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.eunicekuba.bmiproject.fragment.ProgressFragment;
 
@@ -28,18 +33,26 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout mFrameContainer;
     private FragmentTransaction mFragmentTransaction;
     private ProgressFragment mProgFrag;
+    private EditText mWeight;
+    private EditText mHeight;
+    private boolean mIsFieldsOk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mIsFieldsOk = true;
         setContentView(R.layout.layout_main_activity);
         mToolbar = (Toolbar) findViewById(R.id.id_main_toolbar);
         mInputWeight = (RelativeLayout) findViewById(R.id.id_input_weight);
+        mWeight = (EditText) findViewById(R.id.id_text_weight);
+        mHeight = (EditText) findViewById(R.id.id_text_height);
         configButton();
         configFragContainer();
         setSupportActionBar(mToolbar);
 
     }
+
+
 
     private void configFragContainer() {
         mFrameContainer = (FrameLayout) findViewById(R.id.id_frag_container);
@@ -50,8 +63,11 @@ public class MainActivity extends AppCompatActivity {
         mButtonCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                configParentAnimation();
-                mParentAnimation.start();
+                checkFields();
+                if(mIsFieldsOk){
+                    configParentAnimation();
+                    mParentAnimation.start();
+                }
             }
         });
     }
@@ -82,4 +98,39 @@ public class MainActivity extends AppCompatActivity {
         mFragmentTransaction.remove(mProgFrag);
 
     }
+
+
+    private void checkFields(){
+        mHeight.setError(null);
+        mWeight.setError(null);
+        mIsFieldsOk = true;
+
+        String height = mHeight.getText().toString();
+        String weight = mWeight.getText().toString();
+
+        if(height.contains(".")){
+            mHeight.setError("Height in centimeter !");
+            mIsFieldsOk = false;
+        }
+
+        if(height.contains("-")){
+            mHeight.setError("Number not valid");
+            mIsFieldsOk = false;
+        }
+
+        if(weight.contains("-")){
+            mWeight.setError("Number not valid");
+            mIsFieldsOk = false;
+        }
+
+        if(weight.isEmpty()){
+            mWeight.setError("Empty field !");
+            mIsFieldsOk = false;
+        }
+        if(height.isEmpty()){
+            mHeight.setError("Empty field!");
+            mIsFieldsOk = false;
+        }
+    }
+
 }
