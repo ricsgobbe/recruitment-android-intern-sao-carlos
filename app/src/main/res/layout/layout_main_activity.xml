@@ -35,6 +35,8 @@
             android:background="@drawable/button_corner_round"
             android:elevation="4dp"
             android:text="Calculate"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:textColor="@android:color/white" />
 
         <RelativeLayout
