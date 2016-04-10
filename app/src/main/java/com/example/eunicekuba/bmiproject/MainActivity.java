@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private RelativeLayout mInputWeight;
     private Button mButtonCalculate;
     private FrameLayout mFrameContainer;
+    private FragmentTransaction mFragmentTransaction;
+    private ProgressFragment mProgFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +63,11 @@ public class MainActivity extends AppCompatActivity {
         mParentAnimation.setDuration(1000);
         mFrameContainer.setVisibility(View.VISIBLE);
         FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = manager.beginTransaction();
-        fragmentTransaction.replace(R.id.id_frag_container, new ProgressFragment());
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        mFragmentTransaction = manager.beginTransaction();
+        mProgFrag = new ProgressFragment();
+        mFragmentTransaction.replace(R.id.id_frag_container, mProgFrag);
+        mFragmentTransaction.addToBackStack(null);
+        mFragmentTransaction.commit();
 
     }
 
@@ -76,5 +79,7 @@ public class MainActivity extends AppCompatActivity {
         mParentAnimation.setDuration(1000);
         mParentAnimation.start();
         mFrameContainer.setVisibility(View.INVISIBLE);
+        mFragmentTransaction.remove(mProgFrag);
+
     }
 }

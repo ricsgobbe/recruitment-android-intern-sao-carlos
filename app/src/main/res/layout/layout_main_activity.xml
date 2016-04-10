@@ -136,11 +136,24 @@
                     android:textSize="16sp"
                     android:paddingLeft="8dp" />
             </LinearLayout>
-
         </RelativeLayout>
 
+        <View
+            android:id="@+id/auxiliar_view"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_below="@id/id_btn_calculate"/>
+
+        <Button
+            android:id="@+id/id_btn_web"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_below="@id/auxiliar_view"
+            android:layout_centerInParent="true"
+            android:text="Don't know what is BMI ?"
+            android:textColor="@android:color/holo_blue_light"
+            />
 
     </RelativeLayout>
-
-
 </RelativeLayout>
