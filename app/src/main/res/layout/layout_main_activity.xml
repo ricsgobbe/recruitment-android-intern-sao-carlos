@@ -16,8 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/id_main_toolbar"
-        android:visibility="invisible"
-        />
+        android:visibility="invisible" />
 
     <RelativeLayout
         android:id="@+id/id_relative_child"
@@ -27,59 +26,121 @@
         android:background="@android:color/white"
         android:elevation="4dp">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/id_input_weight"
-            android:layout_width="match_parent"
-            android:layout_height="72dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="8dp">
-
-            <EditText
-                android:id="@+id/id_text_weight"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Weight"
-                android:inputType="numberDecimal"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
-                android:singleLine="true" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/id_input_height"
-            android:layout_width="match_parent"
-            android:layout_height="72dp"
-            android:layout_below="@id/id_input_weight"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="8dp">
-
-            <EditText
-                android:id="@+id/id_text_height"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Height"
-                android:inputType="numberDecimal"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
-                android:singleLine="true" />
-        </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/id_btn_calculate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:background="@color/colorAccent"
+            android:background="@drawable/button_corner_round"
             android:elevation="4dp"
             android:text="Calculate"
             android:textColor="@android:color/white" />
 
+        <RelativeLayout
+            android:id="@+id/id_input_height"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_above="@id/id_btn_calculate"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_length_48"
+                    android:paddingRight="8dp"/>
+
+                <EditText
+                    android:id="@+id/id_text_height"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"
+                    android:hint="Height"
+                    android:inputType="numberDecimal"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="Mt"
+                    android:textSize="16sp"
+                    android:paddingLeft="8dp" />
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/id_input_weight"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_above="@id/id_input_height"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:paddingRight="8dp"
+                    android:src="@drawable/ic_weight_48" />
+
+
+                <EditText
+                    android:id="@+id/id_text_weight"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"
+                    android:hint="Weight"
+                    android:inputType="numberDecimal"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:singleLine="true" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="Kg"
+                    android:textSize="16sp"
+                    android:paddingLeft="8dp" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
     </RelativeLayout>
-
-
 
 
 </RelativeLayout>

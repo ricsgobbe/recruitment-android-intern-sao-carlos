@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private RelativeLayout mParentLayout;
     private ObjectAnimator mParentAnimation;
-    private TextInputLayout mInputWeight;
+    private RelativeLayout mInputWeight;
     private Button mButtonCalculate;
     private FrameLayout mFrameContainer;
 
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main_activity);
         mToolbar = (Toolbar) findViewById(R.id.id_main_toolbar);
-        mInputWeight = (TextInputLayout) findViewById(R.id.id_input_weight);
+        mInputWeight = (RelativeLayout) findViewById(R.id.id_input_weight);
         configButton();
         configFragContainer();
         setSupportActionBar(mToolbar);
@@ -71,9 +71,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        mParentAnimation = ObjectAnimator.ofFloat(mParentLayout, "y", mParentLayout.getHeight() + mToolbar.getHeight(), mInputWeight.getHeight());
+        mParentAnimation = ObjectAnimator.ofFloat(mParentLayout, "y", mToolbar.getHeight() - mParentLayout.getHeight(), mInputWeight.getHeight());
         mParentAnimation.setInterpolator(new BounceInterpolator());
         mParentAnimation.setDuration(1000);
         mParentAnimation.start();
+        mFrameContainer.setVisibility(View.INVISIBLE);
     }
 }

@@ -35,7 +35,7 @@ public class ResultFragment extends Fragment{
         Double weight = Double.parseDouble(mWeight.getText().toString());
         Double height = Double.parseDouble(mHeight.getText().toString());
         Double result = weight / (Math.pow(height, 2));
-        mResult.setText(result.toString());
+        mResult.setText(result.intValue() +" kg/m²");
     }
 
 
