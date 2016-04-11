@@ -48,8 +48,8 @@ public class ResultFragment extends Fragment {
     private void putResultOnTextView() {
         mWeight = (TextView) getActivity().findViewById(R.id.id_text_weight);
         mHeight = (TextView) getActivity().findViewById(R.id.id_text_height);
-        Double weight = Double.parseDouble(mWeight.getText().toString());
-        Double height = Double.parseDouble(mHeight.getText().toString()) / 100;
+        Double weight = Double.parseDouble(mWeight.getText().toString() == "" ? 0+"" : mWeight.getText().toString());
+        Double height = Double.parseDouble(mHeight.getText().toString() == "" ? 0+"" : mHeight.getText().toString()) / 100;
         Double result = weight / (Math.pow(height, 2));
         int value = result.intValue();
         mResult.setText(value + " kg/m²");
