@@ -1,4 +1,4 @@
-
+USAR em API 21+
  Para usa-lo deve-se colocar o peso na primeira linha(Kilogramas) e a altura(em centímetro, a conversão para metros é feita no momento do calculo)
 na segunda.Após isso, pressionar o botão "calculate", ele ativará uma animação onde um fragment irá aparecer. Dentro dele tera um "contador" e uma
 ProgressBar indicando que as variáveis estão sendo calculadas. Quando terminar, o conteúdo do fragment será substituido, mostrando o
