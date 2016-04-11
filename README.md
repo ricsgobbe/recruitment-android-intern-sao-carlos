@@ -1,33 +1,8 @@
-# Android Development Internship Recruitment Test
 
-This is a test to qualify for an **Android Development Internship** Position.
+ Para usa-lo deve-se colocar o peso na primeira linha(Kilogramas) e a altura(em centímetro, a conversão para metros é feita no momento do calculo)
+na segunda.Após isso, pressionar o botão "calculate", ele ativará uma animação onde um fragment irá aparecer. Dentro dele tera um "contador" e uma
+ProgressBar indicando que as variáveis estão sendo calculadas. Quando terminar, o conteúdo do fragment será substituido, mostrando o
+resultado. Pressionando o "backButton" a tela executará uma animação que ocultará o fragment, voltando pra tela inicial.
+ Também é possível saber mais informações sobre o IMC, clicando no ultimo botao, este ativará a mesma animacão de antes, porém o
+conteúdo do fragment terá um webview, que mostrará um site com as informações do IMC.
 
-The platform, language and deadline requirements will be sent to you in an invitation email after we are in touch.
-
-This test will be released by 21st March 2015, just hold your breath and check it back then. Sorry for the suspense...
-
-###Instructions
-
-Fork this repo to start development.
-
-After the deadline, the reviewers will clone your forked repo and checkout the last eligible commit (the last one before the deadline) from the master branch.
-
-We will only follow the instructions you leave in your README.md file to build and run the project, please be straight and clear.
-
-Good Luck!
-
-###What should be built
-
-Fork this repo to start development.
-
-Your goal is to implement a BMI calculator mobile app (ref: https://en.wikipedia.org/wiki/Body_mass_index) .
-
-Target the best user experience.
-Make it look good (or acceptable).
-After the deadline, the reviewers will clone your forked repo and checkout the last eligible commit (the last one before the deadline) in the master branch. We will only follow the instructions you leave in this README.md file to build and run the project, please be straight and clear. In case we are not able to run the code you deliver, your efforts won't be considered as an acceptable outcome.
-
-If we succeed in running your project, we will consider your approach in solving the problem as a tiebreaker with other candidates, so please, commit small steps very often so we can understand your performance an ability in breaking down your goal into smaller problems.
-
-Try to make it look material: https://www.google.com/design/spec/material-design/introduction.html
-
-Good Luck!

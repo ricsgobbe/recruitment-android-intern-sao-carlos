@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText mWeight;
     private EditText mHeight;
     private boolean mIsFieldsOk;
+    public static boolean isBackButtonOk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +74,13 @@ public class MainActivity extends AppCompatActivity {
                     FragmentManager manager = getSupportFragmentManager();
                     mFragmentTransaction = manager.beginTransaction();
                     mProgFrag = new ProgressFragment();
-                    mFragmentTransaction.replace(R.id.id_frag_container, mProgFrag);
+                    if(mFragmentTransaction.isEmpty()){
+                        mFragmentTransaction.replace(R.id.id_frag_container, mProgFrag);
+                    }else{
+                        mFragmentTransaction.replace(R.id.id_frag_container, mProgFrag, "ResFrag");
+                    }
                     mFragmentTransaction.addToBackStack(null);
+                    isBackButtonOk = true;
                     mFragmentTransaction.commit();
                     mParentAnimation.start();
 
@@ -112,18 +118,19 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        mParentAnimation = ObjectAnimator.ofFloat(mParentLayout, "y", mToolbar.getHeight() - mParentLayout.getHeight(), mInputWeight.getHeight());
-        mParentAnimation.setInterpolator(new BounceInterpolator());
-        mParentAnimation.setDuration(1000);
-        mParentAnimation.start();
-        mFrameContainer.setVisibility(View.INVISIBLE);
+        if(!isBackButtonOk){
+            super.onBackPressed();
+            mParentAnimation = ObjectAnimator.ofFloat(mParentLayout, "y", mToolbar.getHeight() - mParentLayout.getHeight(), mInputWeight.getHeight());
+            mParentAnimation.setInterpolator(new BounceInterpolator());
+            mParentAnimation.setDuration(1000);
+            mParentAnimation.start();
+            mFrameContainer.setVisibility(View.INVISIBLE);
+        }
         if(mWebFragment == null){
             mFragmentTransaction.remove(mProgFrag);
         }else{
             mFragmentTransaction.remove(mWebFragment);
         }
-
     }
 
 

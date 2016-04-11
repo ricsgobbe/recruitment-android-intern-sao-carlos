@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -31,6 +32,8 @@ public class ProgressFragment extends Fragment {
     private FragmentManager supportFragmentManager;
     private View view;
     private FragmentTransaction fragmentTransaction;
+    private Runnable mRunnable;
+    private Handler mHandler;
 
     @Nullable
     @Override
@@ -44,9 +47,15 @@ public class ProgressFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        mHandler.removeCallbacks(mRunnable);
+    }
+
     private void generateNumbers() {
-        final Handler handler = new Handler();
-        handler.post(new Runnable() {
+        mHandler = new Handler();
+        mRunnable = new Runnable() {
             int counter = 0;
             Integer randNumber;
             Random random = new Random(System.currentTimeMillis());
@@ -57,13 +66,17 @@ public class ProgressFragment extends Fragment {
                     randNumber = random.nextInt(99);
                     mTxtRandomNumb.setText(randNumber.toString());
                     counter++;
-                    handler.postDelayed(this, 1);
+                    mHandler.postDelayed(this, 1);
                 } else {
                     fragmentTransaction.remove(ProgressFragment.this);
                     createCircularEffect();
+                    fragmentTransaction.replace(R.id.id_frag_container, new ResultFragment());
+                    fragmentTransaction.addToBackStack("ResFrag");
+                    fragmentTransaction.commit();
                 }
             }
-        });
+        };
+        mHandler.post(mRunnable);
     }
 
     private void createCircularEffect() {
@@ -71,8 +84,6 @@ public class ProgressFragment extends Fragment {
                 0, mResultContainer.getWidth());
         circularReveal.setDuration(2000);
         circularReveal.start();
-        fragmentTransaction.replace(R.id.id_frag_container, new ResultFragment()).commit();
-
     }
 
 }
