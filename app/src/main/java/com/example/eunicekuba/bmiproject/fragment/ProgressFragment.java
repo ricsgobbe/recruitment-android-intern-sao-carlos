@@ -62,7 +62,7 @@ public class ProgressFragment extends Fragment {
 
             @Override
             public void run() {
-                if (counter < 200) {
+                if (counter < 100) {
                     randNumber = random.nextInt(99);
                     mTxtRandomNumb.setText(randNumber.toString());
                     counter++;

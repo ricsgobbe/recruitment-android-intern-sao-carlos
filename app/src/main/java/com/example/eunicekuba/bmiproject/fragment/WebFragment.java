@@ -19,6 +19,7 @@ public class WebFragment extends Fragment {
 
     private WebView mWebView;
     private static final String mURL = "https://en.wikipedia.org/wiki/Body_mass_index";
+//    private static final String mURLMV = "http://www.minhavida.com.br/";
 
     @Nullable
     @Override
@@ -26,6 +27,9 @@ public class WebFragment extends Fragment {
         View v = inflater.inflate(R.layout.layout_fragment_web, container, false);
         mWebView = (WebView) v.findViewById(R.id.id_webview);
         configWebView();
+        Bundle bundle = this.getArguments();
+        mWebView.loadUrl(mURL);
+
         return v;
     }
 
@@ -41,6 +45,5 @@ public class WebFragment extends Fragment {
                 return false;
             }
         });
-        mWebView.loadUrl(mURL);
     }
 }

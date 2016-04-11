@@ -155,7 +155,7 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_below="@id/auxiliar_view"
             android:layout_centerInParent="true"
-            android:text="Don't know what is BMI ?"
+            android:text="Don't you know what is BMI ?"
             android:textColor="@android:color/holo_blue_light"
             />
 

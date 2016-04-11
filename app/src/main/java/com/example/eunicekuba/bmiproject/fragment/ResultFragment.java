@@ -1,11 +1,14 @@
 package com.example.eunicekuba.bmiproject.fragment;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebViewFragment;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,6 +44,7 @@ public class ResultFragment extends Fragment {
         return v;
     }
 
+
     private void putResultOnTextView() {
         mWeight = (TextView) getActivity().findViewById(R.id.id_text_weight);
         mHeight = (TextView) getActivity().findViewById(R.id.id_text_height);
@@ -71,7 +75,6 @@ public class ResultFragment extends Fragment {
         }else{
             mTxtMsg.setText(mVryUnderweight);
             mImageResult.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.ic_sentiment_dissatisfied_white_24dp, null));
-
         }
 
     }

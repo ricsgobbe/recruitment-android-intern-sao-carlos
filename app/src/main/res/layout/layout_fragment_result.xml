@@ -42,5 +42,7 @@
             android:paddingLeft="8dp"
             android:paddingBottom="2dp"
             android:layout_toEndOf="@+id/id_txt_msg_res" />
+
     </RelativeLayout>
+
 </RelativeLayout>

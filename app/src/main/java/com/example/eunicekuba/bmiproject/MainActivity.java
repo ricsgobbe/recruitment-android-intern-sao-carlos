@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 mFragmentTransaction = manager.beginTransaction();
                 mWebFragment = new WebFragment();
                 mFragmentTransaction.replace(R.id.id_frag_container, mWebFragment);
-                mFragmentTransaction.addToBackStack(null);
+                isBackButtonOk = true;
                 mFragmentTransaction.commit();
                 mParentAnimation.start();
             }
@@ -120,12 +120,12 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         if(!isBackButtonOk){
             super.onBackPressed();
-            mParentAnimation = ObjectAnimator.ofFloat(mParentLayout, "y", mToolbar.getHeight() - mParentLayout.getHeight(), mInputWeight.getHeight());
-            mParentAnimation.setInterpolator(new BounceInterpolator());
-            mParentAnimation.setDuration(1000);
-            mParentAnimation.start();
-            mFrameContainer.setVisibility(View.INVISIBLE);
         }
+        mParentAnimation = ObjectAnimator.ofFloat(mParentLayout, "y", mToolbar.getHeight() - mParentLayout.getHeight(), mInputWeight.getHeight());
+        mParentAnimation.setInterpolator(new BounceInterpolator());
+        mParentAnimation.setDuration(1000);
+        mFrameContainer.setVisibility(View.INVISIBLE);
+        mParentAnimation.start();
         if(mWebFragment == null){
             mFragmentTransaction.remove(mProgFrag);
         }else{
