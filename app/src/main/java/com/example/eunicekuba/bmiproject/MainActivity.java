@@ -121,16 +121,16 @@ public class MainActivity extends AppCompatActivity {
         if(!isBackButtonOk){
             super.onBackPressed();
         }
-        mParentAnimation = ObjectAnimator.ofFloat(mParentLayout, "y", mToolbar.getHeight() - mParentLayout.getHeight(), mInputWeight.getHeight());
-        mParentAnimation.setInterpolator(new BounceInterpolator());
-        mParentAnimation.setDuration(1000);
-        mFrameContainer.setVisibility(View.INVISIBLE);
-        mParentAnimation.start();
         if(mWebFragment == null){
             mFragmentTransaction.remove(mProgFrag);
         }else{
             mFragmentTransaction.remove(mWebFragment);
         }
+        mParentAnimation = ObjectAnimator.ofFloat(mParentLayout, "y", mToolbar.getHeight() - mParentLayout.getHeight(), mInputWeight.getHeight());
+        mParentAnimation.setInterpolator(new BounceInterpolator());
+        mParentAnimation.setDuration(1000);
+        mFrameContainer.setVisibility(View.INVISIBLE);
+        mParentAnimation.start();
     }
 
 
