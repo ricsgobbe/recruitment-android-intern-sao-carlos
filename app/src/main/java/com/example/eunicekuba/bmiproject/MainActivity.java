@@ -38,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
     private WebFragment mWebFragment;
     private EditText mWeight;
     private EditText mHeight;
+    private TextWatcher mWatcher;
     private boolean mIsFieldsOk;
+    private boolean mIsbackspaceOk;
     public static boolean isBackButtonOk;
 
     @Override
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         mInputWeight = (RelativeLayout) findViewById(R.id.id_input_weight);
         mWeight = (EditText) findViewById(R.id.id_text_weight);
         mHeight = (EditText) findViewById(R.id.id_text_height);
+        configHeight();
         configButton();
         configButtonWeb();
         configFragContainer();
@@ -57,6 +60,38 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void configHeight() {
+        mIsbackspaceOk = true;
+        mWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.length() == 2){
+                    StringBuilder builder = new StringBuilder();
+                    builder.append(s.toString());
+                    if(builder.charAt(1) == '.'){
+                        mIsbackspaceOk = true;
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length() == 1 && mIsbackspaceOk){
+                    s.append(".");
+                    mIsbackspaceOk = false;
+                }else{
+                    mIsbackspaceOk = true;
+                }
+
+            }
+        };
+        mHeight.addTextChangedListener(mWatcher);
+    }
 
 
     private void configFragContainer() {
@@ -142,10 +177,6 @@ public class MainActivity extends AppCompatActivity {
         String height = mHeight.getText().toString();
         String weight = mWeight.getText().toString();
 
-        if(height.contains(".")){
-            mHeight.setError("Height in centimeter !");
-            mIsFieldsOk = false;
-        }
         if(weight.isEmpty()){
             mWeight.setError("Empty field !");
             mIsFieldsOk = false;
