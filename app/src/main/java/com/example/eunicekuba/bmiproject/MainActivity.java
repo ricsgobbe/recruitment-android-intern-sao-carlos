@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void configHeight() {
-        mIsbackspaceOk = true;
         mWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -70,24 +69,18 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.length() == 2){
-                    StringBuilder builder = new StringBuilder();
-                    builder.append(s.toString());
-                    if(builder.charAt(1) == '.'){
-                        mIsbackspaceOk = true;
-                    }
+                if(s.length() == 0){
+                        mIsbackspaceOk = false;
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.length() == 1 && mIsbackspaceOk){
+                String heigth = s.toString();
+                if(!heigth.contains(".") && s.length() == 1 && !mIsbackspaceOk){
                     s.append(".");
-                    mIsbackspaceOk = false;
-                }else{
                     mIsbackspaceOk = true;
                 }
-
             }
         };
         mHeight.addTextChangedListener(mWatcher);
