@@ -1,8 +1,7 @@
-USAR na API >= 21
+API >= 15
 
- Para usa-lo deve-se colocar o peso na primeira linha(Kilogramas) e a altura(em metros) na segunda.Após isso, pressionar o botão "calculate", ele ativará uma animação onde um fragment irá aparecer. Dentro dele tera um "contador" e uma
-ProgressBar indicando que as variáveis estão sendo calculadas. Quando terminar, o conteúdo do fragment será substituido, mostrando o
-resultado. Pressionando o "backButton" a tela executará uma animação que ocultará o fragment, voltando pra tela inicial.
- Também é possível saber mais informações sobre o IMC, clicando no ultimo botao, este ativará a mesma animacão de antes, porém o
-conteúdo do fragment terá um webview, que mostrará um site com as informações do IMC.
+  To use it you must put the weight on the first line ( kilograms ) and height ( in meters ) in the second . After this, press the " calculate" button , it will activate an animation where a fragment will appear with the result.
+Pressing the " BackButton " the screen will perform an animation that hides the fragment , returning to the home screen.
+  You can also learn more about BMI by clicking the last button , this will activate the same animation before , but
+fragment content will have a webview that show a website with BMI information
 

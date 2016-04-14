@@ -18,8 +18,7 @@ import com.example.eunicekuba.bmiproject.R;
 public class WebFragment extends Fragment {
 
     private WebView mWebView;
-    private static final String mURL = "https://en.wikipedia.org/wiki/Body_mass_index";
-//    private static final String mURLMV = "http://www.minhavida.com.br/";
+    private String mURL;
 
     @Nullable
     @Override
@@ -28,6 +27,7 @@ public class WebFragment extends Fragment {
         mWebView = (WebView) v.findViewById(R.id.id_webview);
         configWebView();
         Bundle bundle = this.getArguments();
+        mURL = bundle.getString("URL");
         mWebView.loadUrl(mURL);
 
         return v;

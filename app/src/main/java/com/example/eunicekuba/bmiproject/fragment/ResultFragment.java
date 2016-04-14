@@ -1,9 +1,9 @@
 package com.example.eunicekuba.bmiproject.fragment;
 
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +25,9 @@ public class ResultFragment extends Fragment {
     private TextView mHeight;
     private TextView mTxtMsg;
     private ImageView mImageResult;
+    private Button mButton;
+    private  WebFragment frag;
+    private Bundle bundle;
     private static final String mNormal = "Normal";
     private static final String mUnderweight = "Underweight";
     private static final String mOverweight = "Overweight";
@@ -36,12 +39,29 @@ public class ResultFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.layout_fragment_result, container, false);
-        MainActivity.isBackButtonOk = false;
         mResult = (TextView) v.findViewById(R.id.id_txt_result);
         mTxtMsg = (TextView) v.findViewById(R.id.id_txt_msg_res);
         mImageResult = (ImageView) v.findViewById(R.id.id_img_result);
+        mButton = (Button) v.findViewById(R.id.id_web_mv);
+        configBtn();
         putResultOnTextView();
         return v;
+    }
+
+    private void configBtn() {
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                frag = new WebFragment();
+                bundle = new Bundle();
+                bundle.putString("URL", "http://www.minhavida.com.br/");
+                frag.setArguments(bundle);
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.id_frag_container, frag);
+                fragmentTransaction.commit();
+            }
+
+        });
     }
 
 
@@ -59,22 +79,25 @@ public class ResultFragment extends Fragment {
     private void putTextOnMsg(int value) {
         if (value >= 18 && value < 25) {
             mTxtMsg.setText(mNormal);
-            mImageResult.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.ic_sentiment_satisfied_white_24dp, null));
+            mImageResult.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.ic_sentiment_satisfied_white_24dp));
         } else if (value > 25) {
             if (value >= 25 && value < 30) {
                 mTxtMsg.setText(mOverweight);
-                mImageResult.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.ic_sentiment_neutral_white_24dp, null));
+                mImageResult.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.ic_sentiment_neutral_white_24dp));
             } else {
                 mTxtMsg.setText(mObese);
-                mImageResult.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.ic_sentiment_dissatisfied_white_24dp, null));
+                mImageResult.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.ic_sentiment_dissatisfied_white_24dp));
             }
+            mButton.setVisibility(View.VISIBLE);
         } else if (value >= 16) {
             mTxtMsg.setText(mUnderweight);
-            mImageResult.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.ic_sentiment_neutral_white_24dp, null));
+            mImageResult.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.ic_sentiment_neutral_white_24dp));
+            mButton.setVisibility(View.VISIBLE);
 
         }else{
             mTxtMsg.setText(mVryUnderweight);
-            mImageResult.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.ic_sentiment_dissatisfied_white_24dp, null));
+            mImageResult.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.ic_sentiment_dissatisfied_white_24dp));
+            mButton.setVisibility(View.VISIBLE);
         }
 
     }

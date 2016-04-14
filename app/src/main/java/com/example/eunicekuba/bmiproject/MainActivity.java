@@ -1,24 +1,24 @@
 package com.example.eunicekuba.bmiproject;
 
+import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.animation.BounceInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.example.eunicekuba.bmiproject.fragment.ProgressFragment;
+import com.example.eunicekuba.bmiproject.fragment.ResultFragment;
 import com.example.eunicekuba.bmiproject.fragment.WebFragment;
 
 /**
@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     private Button mButtonWeb;
     private FrameLayout mFrameContainer;
     private FragmentTransaction mFragmentTransaction;
-    private ProgressFragment mProgFrag;
     private WebFragment mWebFragment;
     private EditText mWeight;
     private EditText mHeight;
@@ -96,21 +95,21 @@ public class MainActivity extends AppCompatActivity {
         mButtonCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Animator circularReveal;
                 checkFields();
+                configParentAnimation();
+                FragmentManager manager = getSupportFragmentManager();
+                mFragmentTransaction = manager.beginTransaction();
                 if(mIsFieldsOk){
-                    configParentAnimation();
-                    FragmentManager manager = getSupportFragmentManager();
-                    mFragmentTransaction = manager.beginTransaction();
-                    mProgFrag = new ProgressFragment();
-                    if(mFragmentTransaction.isEmpty()){
-                        mFragmentTransaction.replace(R.id.id_frag_container, mProgFrag);
-                    }else{
-                        mFragmentTransaction.replace(R.id.id_frag_container, mProgFrag, "ResFrag");
-                    }
-                    mFragmentTransaction.addToBackStack(null);
-                    isBackButtonOk = true;
+                    ResultFragment resFrag = new ResultFragment();
+                    mFragmentTransaction.replace(R.id.id_frag_container, resFrag);
                     mFragmentTransaction.commit();
                     mParentAnimation.start();
+                    isBackButtonOk = true;
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                        circularReveal = createCircularEffect();
+                        circularReveal.start();
+                    }
 
                 }
             }
@@ -125,7 +124,10 @@ public class MainActivity extends AppCompatActivity {
                 configParentAnimation();
                 FragmentManager manager = getSupportFragmentManager();
                 mFragmentTransaction = manager.beginTransaction();
+                Bundle bundle = new Bundle();
+                bundle.putString("URL","https://en.wikipedia.org/wiki/Body_mass_index");
                 mWebFragment = new WebFragment();
+                mWebFragment.setArguments(bundle);
                 mFragmentTransaction.replace(R.id.id_frag_container, mWebFragment);
                 isBackButtonOk = true;
                 mFragmentTransaction.commit();
@@ -149,16 +151,18 @@ public class MainActivity extends AppCompatActivity {
         if(!isBackButtonOk){
             super.onBackPressed();
         }
-        if(mWebFragment == null){
-            mFragmentTransaction.remove(mProgFrag);
-        }else{
-            mFragmentTransaction.remove(mWebFragment);
+        if(!(mFragmentTransaction == null)){
+            if(!(mWebFragment == null)){
+                mFragmentTransaction.remove(mWebFragment);
+            }
+            mParentAnimation = ObjectAnimator.ofFloat(mParentLayout, "y", mToolbar.getHeight() - mParentLayout.getHeight(), mInputWeight.getHeight());
+            mParentAnimation.setInterpolator(new BounceInterpolator());
+            mParentAnimation.setDuration(1000);
+            mFrameContainer.setVisibility(View.INVISIBLE);
+            mParentAnimation.start();
+            isBackButtonOk = false;
         }
-        mParentAnimation = ObjectAnimator.ofFloat(mParentLayout, "y", mToolbar.getHeight() - mParentLayout.getHeight(), mInputWeight.getHeight());
-        mParentAnimation.setInterpolator(new BounceInterpolator());
-        mParentAnimation.setDuration(1000);
-        mFrameContainer.setVisibility(View.INVISIBLE);
-        mParentAnimation.start();
+
     }
 
 
@@ -178,6 +182,12 @@ public class MainActivity extends AppCompatActivity {
             mHeight.setError("Empty field!");
             mIsFieldsOk = false;
         }
+    }
+    private Animator createCircularEffect() {
+        Animator circularReveal = ViewAnimationUtils.createCircularReveal(mFrameContainer, mFrameContainer.getWidth() / 2, mFrameContainer.getHeight() / 2,
+                0, mFrameContainer.getWidth());
+        circularReveal.setDuration(2000);
+        return circularReveal;
     }
 
 }

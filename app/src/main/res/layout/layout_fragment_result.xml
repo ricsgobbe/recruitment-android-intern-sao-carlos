@@ -4,14 +4,22 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
+    <View
+        android:id="@+id/aux_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"/>
+
     <TextView
         android:id="@+id/id_txt_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="56sp"
-        android:layout_centerInParent="true"
         android:text="GO"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:layout_above="@id/aux_view"
+        android:layout_centerHorizontal="true"
+      />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,21 +35,33 @@
             android:id="@+id/id_txt_msg_res"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/id_view_helper"
-            android:layout_centerInParent="true"
             android:textSize="24sp"
             android:textColor="@android:color/white"
-            android:text="TESTE"/>
+            android:text="TESTE"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
         <ImageView
             android:id="@+id/id_img_result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_sentiment_satisfied_white_24dp"
-            android:layout_above="@+id/id_view_helper"
             android:paddingLeft="8dp"
             android:paddingBottom="2dp"
+            android:layout_alignBottom="@+id/id_txt_msg_res"
+            android:layout_toRightOf="@+id/id_txt_msg_res"
             android:layout_toEndOf="@+id/id_txt_msg_res" />
+        <Button
+            android:id="@+id/id_web_mv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:layout_below="@id/id_txt_msg_res"
+            android:text="Do you need some help to improve your health ?"
+            android:textColor="@android:color/white"
+            android:visibility="gone"
+            style="?android:attr/borderlessButtonStyle"/>
 
     </RelativeLayout>
 
